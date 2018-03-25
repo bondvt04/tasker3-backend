@@ -1,0 +1,117 @@
+version: "3"
+
+services:
+  tasker-backend:
+    build:
+      context: ./
+    networks:
+      - backend
+      - frontend
+    expose:
+      - "4321"
+    ports:
+      # debug ports:
+      - "9230:9230"
+#    volumes:
+#      - ./repos/sf-backend/server.js:/app/server.js
+#      - ./repos/sf-backend/app:/app/app
+#      - ./repos/sf-backend/lib:/app/lib
+#      - ./repos/sf-backend/services:/app/services
+#      - ./repos/sf-backend/workers:/app/workers
+#    depends_on:
+#      - sf-mongo
+#      - sf-rabbit
+#      - sf-minio
+
+  tasker-auth:
+    build:
+      context: ../tasker3-auth
+#    environment:
+#      SIMPLIFIELD_DB_HOST: sf-mongo
+#      NODE_ENV: ${NODE_ENV}
+#      MIDDLEWARE_CORS_DISABLED: "yes"
+#      FORCE_MOBILE_URL_DISABLED: "yes"
+#    ports:
+#      - "9241:9241"
+#    expose:
+#      - "3000"
+#    volumes:
+#      - ./repos/sf-auth/app:/app/app
+#      - ./repos/sf-auth/services:/app/services
+#      - ./repos/sf-auth/scripts:/app/scripts
+#      - ./repos/sf-auth/static:/app/static
+#      - ./repos/sf-auth/server.js:/app/server.js
+#    networks:
+#      - backend
+#      - frontend
+#    depends_on:
+#      - sf-mongo
+
+#  tasker-frontend:
+#    build:
+#      context: ./repos/sf-frontend
+#      args:
+#        NPM_TOKEN: ${NPM_TOKEN}
+#    ports:
+#      - "35729:35729"
+#    expose:
+#      - "4321"
+#    volumes:
+#      - frontend_dist:/app/dist
+#      - ./repos/sf-frontend/src:/app/src
+#      - ./repos/sf-frontend/tests:/app/tests # in order to run tests if needed
+#    networks:
+#      - backend
+#      - frontend
+#
+#  tasker-rabbit: #@todo protect with password
+#    image: rabbitmq:3.6.9-management
+#    environment:
+#      RABBITMQ_DEFAULT_VHOST: "/"
+#    expose:
+#      - "5672"
+#    ports:
+#      - "15672:15672" # management plugin
+#      - "5672:5672" # need for integration tests etc
+#    networks:
+#      - backend
+#    healthcheck:
+#      test: ["CMD", "rabbitmqctl", "node_health_check"]
+#      interval: 30s
+#      timeout: 5s
+#      retries: 6
+#
+#  tasker-minio:
+#    image: minio/minio:RELEASE.2018-01-18T20-33-21Z
+#    expose:
+#      - "9000"
+#    ports:
+#      - "9000:9000"
+#    environment:
+#      MINIO_ACCESS_KEY: ACCESS_KEY
+#      MINIO_SECRET_KEY: SECRET_KEY
+#    command: server /data/files
+#    volumes:
+#      - ./repos/sf-databases/dbs/default/files:/data/files
+#    networks:
+#      - backend
+#
+#  tasker-mongo:
+#    image: mongo:3.4.10
+#    expose:
+#      - "27017"
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - ./repos/sf-databases/dbs/default/db:/data/db
+#    networks:
+#      - backend
+#    command: "mongod --smallfiles" # use smallfiles option in order to decrease the inital size of data files and reduce journal size
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  frontend_dist:
+  login_dist:

@@ -1,0 +1,14 @@
+{
+  "name": "tasker3-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bondvt04/tasker3-backend",
+  "author": "Anatoliy Bondar <bondvt04@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
